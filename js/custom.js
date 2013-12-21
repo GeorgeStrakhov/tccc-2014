@@ -14,7 +14,25 @@ function createNewLines(n) {
 }
 
 function generateLine() {
-	return "что говорить когда нечего говорить";
+	if($('#lovemessage').children().length < 5 || Math.random() > 0.1) {
+		return generateNameCombo();
+	}
+	return allSlogans[Math.floor(Math.random() * allSlogans.length)];
+}
+
+function generateNameCombo() {
+	var firstName = getRandomName();
+	var secondName = getRandomName(firstName);
+	var combo = firstName + ' + ' + secondName + ' =';
+	return combo.replace(/ /g, '&nbsp;');
+}
+
+function getRandomName(notName) {
+	var name = allNames[Math.floor(Math.random() * allNames.length)];
+	if(notName && name == notName) {
+		return getRandomName(notName);
+	}
+	return name;
 }
 
 function addLine(line) {
@@ -26,8 +44,8 @@ function addLine(line) {
 
 
 $(document).ready(function(){
-	console.log('Blast happiness!');
-	addLines(10);
+	$('#lovemessage').find('p').slabText();
+	addLines(20);
 	var lastScrollTop = $(document).height()-50;
 	$(window).scroll(function(e){
 		var st = $(this).scrollTop()+$(window).innerHeight();

@@ -45,6 +45,7 @@ body {
   background-repeat: repeat;
   color: #FFF;
   font-family: Georgia, serif;
+  text-transform: uppercase;
 }
 h1,
 h2,
@@ -56,16 +57,16 @@ p {
   font-family: Georgia, serif;
 }
 .bottle {
+  position: fixed;
+  top: 10%;
+  left: 78%;
   max-height: 80%;
+  max-width: 20%;
   margin: 0 auto;
-  margin-top: 25%;
 }
-@media (min-width: 900px) {
+@media (max-width: 500px) {
   .bottle {
-    position: fixed;
-    top: 80px;
-    left: 100px;
-    margin: 0;
+    top: 25%;
   }
 }
 #snowglobe {
