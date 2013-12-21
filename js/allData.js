@@ -4,7 +4,17 @@ var allSlogans = [
     "be refreshed",
     "вливайся",
     "все будет",
-    "Coca-Cola&nbsp;+&nbsp;Gravity&nbsp;="
+    "Coca-Cola&nbsp;+&nbsp;Gravity&nbsp;=",
+    "Coca-Cola&nbsp;+&nbsp;Gravity&nbsp;=",
+    "Всегда",
+    "Shake up for happiness",
+    "Stay on the Coke side of life",
+    "Coke goes with good times",
+    "Праздник к нам приходит",
+    "Delicious and refreshing",
+    "It's the real thing",
+    "Вливайся",
+    "Have a Coke and a smile"
 ];
 
 var allNames = [
