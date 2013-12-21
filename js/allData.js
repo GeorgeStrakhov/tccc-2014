@@ -6,6 +6,8 @@ var allSlogans = [
     "все будет",
     "Coca-Cola&nbsp;+&nbsp;Gravity&nbsp;=",
     "Coca-Cola&nbsp;+&nbsp;Gravity&nbsp;=",
+    "Coca-Cola&nbsp;+&nbsp;Gravity&nbsp;=",
+    "Coca-Cola&nbsp;+&nbsp;Gravity&nbsp;=",
     "Всегда",
     "Shake up for happiness",
     "Stay on the Coke side of life",
