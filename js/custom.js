@@ -57,6 +57,9 @@ function setTypeFace() {
 	var tfkey = ($.QueryString["typeface"]) ? $.QueryString["typeface"] : 0;
 	var tf = typefaces[tfkey];
 	var css = '.singleLine {font-family: '+tf+'}';
+	if(noSlab) {
+		css+='.singleLine {text-align: right;}';
+	}
 	var head = document.getElementsByTagName('head')[0];
 	var style = document.createElement('style');
 
@@ -72,17 +75,20 @@ function setTypeFace() {
 
 function getFsize() {
 	var wWidth = $(window).width();
-	var fs = wWidth * 0.75 / 15;
+	var fs = wWidth * 0.75 / 19;
 	return fs;
 }
 
 window.onload = function(){
-	setTypeFace();
 
 	var noSlab= window.noSlab= $.QueryString["noslab"];
+	var fs = getFsize();
+	setTypeFace();
 
 	if(!noSlab) {
 		$('#lovemessage').find('p').slabText();
+	} else {
+		$('#lovemessage').find('p').css('font-size', fs+'px');
 	}
 	setTimeout(function(){
 		addLines(20);
@@ -96,8 +102,8 @@ window.onload = function(){
 		}
 	});
 	$( window ).resize(function() {
-		if(!!noSlab) {
-			var fs = getFsize();
+		if(noSlab) {
+			fs = getFsize();
 			$('.singleLine').css('font-size', fs+'px');
 		}
 	});
