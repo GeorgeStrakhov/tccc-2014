@@ -39,7 +39,7 @@ function addLine(line) {
 	line = String(line);
 	var HTMLstr = '<p class="singleLine">'+line+'</p>';
 	$('#lovemessage').append(HTMLstr);
-	if(doSlabText) {
+	if(!noSlab) {
 		$('#lovemessage').children().last().slabText();
 	} else {
 		var fs = getFsize();
@@ -79,9 +79,9 @@ function getFsize() {
 window.onload = function(){
 	setTypeFace();
 
-	var doSlabText = window.doSlabText = $.QueryString["slab"];
+	var noSlab= window.noSlab= $.QueryString["noslab"];
 
-	if(doSlabText) {
+	if(!noSlab) {
 		$('#lovemessage').find('p').slabText();
 	}
 	setTimeout(function(){
@@ -96,7 +96,7 @@ window.onload = function(){
 		}
 	});
 	$( window ).resize(function() {
-		if(!doSlabText) {
+		if(!!noSlab) {
 			var fs = getFsize();
 			$('.singleLine').css('font-size', fs+'px');
 		}
