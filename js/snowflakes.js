@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
 function getWidth() {
 	var x = 0;
 	if (self.innerHeight) {

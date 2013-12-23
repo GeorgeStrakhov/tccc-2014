@@ -39,13 +39,54 @@ function addLine(line) {
 	line = String(line);
 	var HTMLstr = '<p class="singleLine">'+line+'</p>';
 	$('#lovemessage').append(HTMLstr);
-	$('#lovemessage').children().last().slabText();
+	if(doSlabText) {
+		$('#lovemessage').children().last().slabText();
+	} else {
+		var fs = getFsize();
+		$('#lovemessage').children().last().css('font-size', fs+'px');
+	}
 }
 
+function setTypeFace() {
+	var typefaces = [
+		'\"Poiret One\", cursive;',
+		'\"Ubuntu\", sans-serif;',
+		'\"Didact Gothic\", sans-serif;',
+		'\"Open Sans Condensed\", sans-serif'
+	];
+	var tfkey = ($.QueryString["typeface"]) ? $.QueryString["typeface"] : 0;
+	var tf = typefaces[tfkey];
+	var css = '.singleLine {font-family: '+tf+'}';
+	var head = document.getElementsByTagName('head')[0];
+	var style = document.createElement('style');
 
-$(document).ready(function(){
-	$('#lovemessage').find('p').slabText();
-	addLines(20);
+	style.type = 'text/css';
+	if (style.styleSheet){
+		style.styleSheet.cssText = css;
+	} else {
+		style.appendChild(document.createTextNode(css));
+	}
+
+	head.appendChild(style);
+}
+
+function getFsize() {
+	var wWidth = $(window).width();
+	var fs = wWidth * 0.75 / 15;
+	return fs;
+}
+
+window.onload = function(){
+	setTypeFace();
+
+	var doSlabText = window.doSlabText = $.QueryString["slab"];
+
+	if(doSlabText) {
+		$('#lovemessage').find('p').slabText();
+	}
+	setTimeout(function(){
+		addLines(20);
+	},100);
 	var lastScrollTop = $(document).height()-50;
 	$(window).scroll(function(e){
 		var st = $(this).scrollTop()+$(window).innerHeight();
@@ -54,4 +95,25 @@ $(document).ready(function(){
 			lastScrollTop = $(document).height()-50;
 		}
 	});
-});
+	$( window ).resize(function() {
+		if(!doSlabText) {
+			var fs = getFsize();
+			$('.singleLine').css('font-size', fs+'px');
+		}
+	});
+};
+
+//query string
+(function($) {
+	$.QueryString = (function(a) {
+		if (a == "") return {};
+		var b = {};
+		for (var i = 0; i < a.length; ++i)
+		{
+			var p=a[i].split('=');
+			if (p.length != 2) continue;
+			b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+		}
+		return b;
+	})(window.location.search.substr(1).split('&'))
+})(jQuery);
