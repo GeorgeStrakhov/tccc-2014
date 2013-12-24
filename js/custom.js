@@ -93,6 +93,8 @@ window.onload = function(){
 	$('#spinner').hide();
 	$('#lovemessage').show();
 
+	var currentScroll = 0;
+
 	var noSlab= window.noSlab= $.QueryString["noslab"];
 	var fs = getFsize();
 	setTypeFace();
@@ -109,7 +111,8 @@ window.onload = function(){
 	//scroll listener
 	var lastScrollTop = $(document).height()-50;
 	$(window).scroll(function(e){
-		var st = $(this).scrollTop()+$(window).innerHeight();
+		currentScroll = $(this).scrollTop();
+		var st = $(this).scrollTop() + $(window).innerHeight();
 		if (st > lastScrollTop){//scrolling down
 			addLines(10);
 			lastScrollTop = $(document).height()-50;
@@ -122,6 +125,11 @@ window.onload = function(){
 			$('.singleLine').css('font-size', fs+'px');
 		}
 	});
+	//let's scroll the page slowly
+	setInterval(function(){
+		$(document).scrollTop(currentScroll);
+		currentScroll++;
+	},100);
 };
 
 //query string
