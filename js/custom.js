@@ -58,8 +58,7 @@ function setTypeFace() {
 	var tf = typefaces[tfkey];
 	var css = '.singleLine {font-family: '+tf+'}';
 	if(noSlab) {
-		css+='.singleLine {text-align: right;}';
-	}
+		css+='.singleLine {text-align: right;}'; }
 	var head = document.getElementsByTagName('head')[0];
 	var style = document.createElement('style');
 
@@ -79,11 +78,25 @@ function getFsize() {
 	return fs;
 }
 
+function loadMusic() {
+	var audiofile = 'sounds/coke-prazdnik_small';
+	var canPlayMp3 = (new Audio().canPlayType('audio/mpeg') !== '')?true:false;
+	var canPlayOgg = (new Audio().canPlayType('audio/ogg; codecs="vorbis"') !== '')?true:false;
+	var music = window.music = new Audio(audiofile+'.'+((canPlayMp3)?'mp3':'ogg'));
+
+	music.load();
+	music.play();
+}
+
 window.onload = function(){
+
+	$('#spinner').hide();
+	$('#lovemessage').show();
 
 	var noSlab= window.noSlab= $.QueryString["noslab"];
 	var fs = getFsize();
 	setTypeFace();
+	loadMusic();
 
 	if(!noSlab) {
 		$('#lovemessage').find('p').slabText();
@@ -93,6 +106,7 @@ window.onload = function(){
 	setTimeout(function(){
 		addLines(20);
 	},100);
+	//scroll listener
 	var lastScrollTop = $(document).height()-50;
 	$(window).scroll(function(e){
 		var st = $(this).scrollTop()+$(window).innerHeight();
@@ -101,6 +115,7 @@ window.onload = function(){
 			lastScrollTop = $(document).height()-50;
 		}
 	});
+	//resize listener
 	$( window ).resize(function() {
 		if(noSlab) {
 			fs = getFsize();
